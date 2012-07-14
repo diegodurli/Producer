@@ -1,20 +1,18 @@
-<p id="notice"><%= notice %></p>
+<h2><%= @post.title %></h2>
 
-<p>
-  <b>Title:</b>
-  <%= @post.title %>
-</p>
+<div id="post">
+	<%= simple_format @post.body %>
+</div>
+<hr/>
 
-<p>
-  <b>Excerpt:</b>
-  <%= @post.excerpt %>
-</p>
+<h3>Comments</h3>
 
-<p>
-  <b>Body:</b>
-  <%= @post.body %>
-</p>
+<div id="comments">
+	<%= render @post.comments || "Nobody commented this post yet." %>
+</div>
+<hr/>
 
+<%= render 'comments/form', post: @post, comment: Comment.new %>
 
 <%= link_to 'Edit', edit_post_path(@post) %> |
 <%= link_to 'Back', posts_path %>
