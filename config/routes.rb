@@ -1,12 +1,11 @@
 Producer::Application.routes.draw do
-
+  
+  root to: "pages#index"
   resources :categories
 
   resources :posts do
     resources :comments, only: [:create]
   end
-
-  get "pages/index"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
