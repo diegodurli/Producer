@@ -1,13 +1,70 @@
-<!DOCTYPE html>
 <html>
 <head>
   <title>Producer</title>
-  <%= stylesheet_link_tag    "application", :media => "all" %>
-  <%= javascript_include_tag "application" %>
-  <%= csrf_meta_tags %>
+  <%= stylesheet_link_tag :application %>
+  <%= javascript_include_tag :defaults %>
+  <%= csrf_meta_tag %>
 </head>
 <body>
-	<%= flash_messages %>
-	<%= yield %>
+
+  <div id="wrapper">
+    <div id="header">
+      <div id="logo">
+        <%= image_tag "logo_header.png", :class => "middle" %>
+      </div>
+
+      <div id="main-nav">
+        <ul>
+          <li>
+            <%= link_to root_path do %>
+              HOME <br/><span>DISCOVER OUR
+              <br/> AWESOME PRODUCT</span>
+            <% end %>
+          </li>
+          <li>
+            <a>TOUR <br/><span>DISCOVER WHY IT'LL
+              <br/> MAKE YOUR LIFE BETTER</span></a>
+          </li>
+          <li>
+            <%= link_to posts_path do %>
+              BLOG <br/><span>NEWS, TIPS AND OUR
+              <br/> RANDOM THOUGHTS</span>
+            <% end %>
+          </li>
+          <li>
+            <a>FAQ <br/><span>FREQUENTLY ASKED
+            <br/> QUESTION</span></a>
+          </li>
+          <li>
+            <a>CONTACT <br/><span>YOU'RE NOT ALONE
+            <br/> GET IN TOUCH</span></a>
+          </li>
+          <li>
+            <a>PRICE <br/><span>SMALL AMOUNT
+            <br/> FOR A BIG BENEFIT</span></a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div id="content">
+      <%= flash_messages %>
+      <%= yield %>
+    </div>
+
+    <div id="footer">
+      <div id="footer-nav">
+        <ul>
+          <li><a>HOME</a></li>
+          <li><a>TOUR</a></li>
+          <li><a>BLOG</a></li>
+          <li><a>FAQ</a></li>
+          <li><a>CONTACT</a></li>
+          <li><a>PRICE</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
 </body>
 </html>

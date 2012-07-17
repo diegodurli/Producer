@@ -1,50 +1,25 @@
 class PostsController < ApplicationController
-
-  before_filter :load_post     , only: [:show, :edit, :update, :destroy]
-  before_filter :load_resources, only: [:new, :create, :edit, :update]
+  
+  before_filter :categories
 
   def index
-    @posts = Post.all
+    @posts = Post.scoped
+    @posts = @posts.search(params[:search]) if params[:search]
+    @posts = @category.posts if @category.present?
+    @posts = @posts.published
+
     respond_with @posts
   end
 
   def show
+    @post = Post.published.find(params[:id])
     respond_with @post
   end
 
-  def new
-    @post = Post.new
-    respond_with @post
-  end
-
-  def edit
-  end
-
-  def create
-    @post = Post.new(params[:post])
-
-    flash[:notice] = 'Post was successfully created.' if @post.save
-    respond_with @post
-  end
-
-  def update
-    flash[:notice] = 'Post was successfully updated.' if @post.update_attributes(params[:post])
-    respond_with @post
-  end
-
-  def destroy
-    @post.destroy
-    respond_with @post
-  end
-  
   protected
 
-  def load_post
-    @post = Post.find(params[:id])
-  end
-
-  def load_resources
+  def categories
     @categories = Category.all
-    @authors    = User.all
+    @category   = Category.find(params[:category_id]) if params[:category_id]
   end
 end

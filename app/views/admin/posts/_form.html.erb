@@ -1,0 +1,68 @@
+<%= form_for [:admin, @post] do |f| %>
+   <%= error_messages_for @post %>
+
+   <div id="body">
+     <div class="field">
+       <%= f.label :author_id, "Post by: " %>
+       <%= f.collection_select :author_id, @authors, :id, :full_name %>
+     </div>
+
+     <div class="field">
+       <%= f.text_field :title, :placeholder => "Title", :class => "title" %>
+     </div>
+
+     <div class="field">
+       <%= f.text_area :excerpt, :placeholder => "Excerpt", :rows => 5, :cols => 70 %>
+     </div>
+
+     <div class="field">
+       <%= f.text_area :body, :placeholder => "Body", :rows => 30, :cols => 70 %>
+     </div>
+
+     <div class="field">
+       <%= f.check_box :draft %>
+       <%= f.label :draft, "Save as Draft" %>
+     </div>
+
+     <hr class="thick" />
+
+     <p>
+       <%= f.submit :class => "button" %> or <%= link_to "cancel", admin_posts_path %>
+     </p>
+   </div>
+
+   <div id="sidebar">
+     <%= section "Publish with these categories" do %>
+       <ul class="categories-field">
+         <% @categories.each do |c| %>
+           <li><%= check_box_tag "post[category_ids][]", 
+           c.id, @post.categories.include?(c) %> 
+           <%= c.name %></li>
+         <% end %>
+       </ul>
+       <div class="bar">
+         <%= link_to "New category", new_admin_category_path, :class => "button right" %>
+       </div>
+       <br/>
+     <% end %>
+
+     <hr/>
+
+     <%= section do %>
+       <div class="field">
+         <%= f.label :published_at %><br/>
+         <%= f.date_select :published_at, :use_short_month => true %>
+       </div>
+     <% end %>
+
+     <hr/>
+
+     <%= section  do %>
+       <div class="field">
+         <%= f.label :slug, "Permalink" %><br/>
+         <%= f.text_field :slug, :size => 27 %>
+       </div>
+     <% end %>
+   </div>
+
+ <% end %>

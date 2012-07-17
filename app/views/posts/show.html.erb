@@ -1,18 +1,26 @@
-<h2><%= @post.title %></h2>
+<%= stylesheet_link_tag "blog" %>
 
-<div id="post">
-	<%= simple_format @post.body %>
+<div id="column1">
+
+  <h2><%= @post.title %></h2>
+
+  <div id="post">
+    <%= simple_format @post.body %>
+  </div>
+
+  <hr/>
+
+  <h3>Comments</h3>
+
+  <div id="comments">
+  <% if @post.comments.any? %>
+    <%= render :partial => @post.comments %>
+  <% else %>
+    <p>Nobody commented this post yet.</p>
+  <% end %>
+  </div>
+
+  <%= render "comments/form", :post => @post, :comment => Comment.new %>
 </div>
-<hr/>
 
-<h3>Comments</h3>
-
-<div id="comments">
-	<%= render @post.comments || "Nobody commented this post yet." %>
-</div>
-<hr/>
-
-<%= render 'comments/form', post: @post, comment: Comment.new %>
-
-<%= link_to 'Edit', edit_post_path(@post) %> |
-<%= link_to 'Back', posts_path %>
+<%= render "sidebar" %>
