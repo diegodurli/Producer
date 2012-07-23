@@ -2,6 +2,10 @@ Producer::Application.routes.draw do
   
   root to: "pages#index"
   
+  match '/home'  , to: 'pages#index' , as: :home
+  match '/prices', to: 'pages#prices', as: :prices
+  match '/tour'  , to: 'pages#tour'  , as: :tour
+  
   namespace :admin do
     resources :posts
     resources :categories, except: :show

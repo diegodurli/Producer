@@ -1,6 +1,6 @@
 <h2>Posts</h2>
 
-<%- if @posts.present? -%>
+<% if @posts.present? %>
 <ul class="list">
   <% @posts.each do |post| %>
     <%= content_tag_for :li, post, :class => cycle(:odd, :even) do %>
@@ -13,14 +13,14 @@
     <% end %>
   <% end %>
 </ul>
-<%- else -%>
-  <p>You don't have any posts yet.</p>
-<%- end -%>
+<% else %>
+  <p><%= t :empty, collection: "posts" %></p> <!-- t = I18n.translate -->
+<% end %>
 
 <hr class="thick" />
 
 <div class="bar">
   <div class="right">
-    <%= link_to 'New Post', new_admin_post_path, :class => "button" %>
+    <%= link_to_new Post, new_admin_post_path, :class => "button" %>
   </div>
 </div>

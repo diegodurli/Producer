@@ -3,36 +3,36 @@
 
    <div id="body">
      <div class="field">
-       <%= f.label :author_id, "Post by: " %>
+       <%= f.label :author_id, t('.author') %>
        <%= f.collection_select :author_id, @authors, :id, :full_name %>
      </div>
 
      <div class="field">
-       <%= f.text_field :title, :placeholder => "Title", :class => "title" %>
+       <%= f.text_field :title, :placeholder => ta(Post, :title), :class => "title" %>
      </div>
 
      <div class="field">
-       <%= f.text_area :excerpt, :placeholder => "Excerpt", :rows => 5, :cols => 70 %>
+       <%= f.text_area :excerpt, :placeholder => ta(Post, :excerpt), :rows => 5, :cols => 70 %>
      </div>
 
      <div class="field">
-       <%= f.text_area :body, :placeholder => "Body", :rows => 30, :cols => 70 %>
+       <%= f.text_area :body, :placeholder => ta(Post, :body), :rows => 30, :cols => 70 %>
      </div>
 
      <div class="field">
        <%= f.check_box :draft %>
-       <%= f.label :draft, "Save as Draft" %>
+       <%= f.label :draft %>
      </div>
 
      <hr class="thick" />
 
      <p>
-       <%= f.submit :class => "button" %> or <%= link_to "cancel", admin_posts_path %>
+       <%= f.submit :class => "button" %> or <%= link_to t("cancel"), admin_posts_path %>
      </p>
    </div>
 
    <div id="sidebar">
-     <%= section "Publish with these categories" do %>
+     <%= section t('.categories') do %>
        <ul class="categories-field">
          <% @categories.each do |c| %>
            <li><%= check_box_tag "post[category_ids][]", 
@@ -41,7 +41,7 @@
          <% end %>
        </ul>
        <div class="bar">
-         <%= link_to "New category", new_admin_category_path, :class => "button right" %>
+         <%= link_to_new Category, new_admin_category_path, :class => "button right" %>
        </div>
        <br/>
      <% end %>
@@ -59,7 +59,7 @@
 
      <%= section  do %>
        <div class="field">
-         <%= f.label :slug, "Permalink" %><br/>
+         <%= f.label :slug, t('.slug') %><br/>
          <%= f.text_field :slug, :size => 27 %>
        </div>
      <% end %>
